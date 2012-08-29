@@ -1,9 +1,21 @@
 package com.google.code.gcless;
 
+import java.util.Locale;
+
 public final class StringUtils {
 
 	public static Iterable<String> splitBySpace(String str) {
 		return new Splitter(str);
+	}
+
+	/**
+	 * @see public static Appendable replaceToken(String original, String token, boolean ignoreCase);
+	 * @param original
+	 * @param token
+	 * @return
+	 */
+	public static Appendable replaceToken(String original, String token) {
+		return replaceToken(original, token, false);
 	}
 
 	/**
@@ -14,9 +26,10 @@ public final class StringUtils {
 	 * @param original
 	 *            - cannot be null
 	 * @param token
+	 * @param ignoreCase
 	 * @return
 	 */
-	public static Appendable replaceToken(String original, String token) {
+	public static Appendable replaceToken(String original, String token, boolean ignoreCase) {
 		if (original == null) {
 			throw new IllegalArgumentException("original string cannot be null");
 		}
@@ -28,10 +41,21 @@ public final class StringUtils {
 		if (tokenLength > originalLength) {
 			return new StringBuilder(original);
 		}
+		
+		String originalWithCaseApplied;
+		String tokenWithCaseApplied;
+		if( ignoreCase ) {
+			//doesnt matter which locale to use. Just make sure they are in the same locale.
+			originalWithCaseApplied = original.toLowerCase(Locale.UK);
+			tokenWithCaseApplied = token.toLowerCase(Locale.UK);
+		} else {
+			originalWithCaseApplied = original;
+			tokenWithCaseApplied = token;
+		}
 
 		StringBuilder result = new StringBuilder();
 		boolean previousCharIsWhitespace = true;
-		char firstChar = token.charAt(0);
+		char firstChar = tokenWithCaseApplied.charAt(0);
 		int lastTokenEndIndex = 0;
 		for (int i = 0; i < originalLength;) {
 			int tokenEndIndex = tokenLength + i;
@@ -39,7 +63,7 @@ public final class StringUtils {
 			if( tokenEndIndex > originalLength ) {
 				break;
 			}
-			char curChar = original.charAt(i);
+			char curChar = originalWithCaseApplied.charAt(i);
 			if (curChar != firstChar) {
 				if (!Character.isWhitespace(curChar)) {
 					previousCharIsWhitespace = false;
@@ -58,8 +82,8 @@ public final class StringUtils {
 
 			boolean matched = true;
 			for (int j = 1; j < tokenLength && i + j < originalLength; j++) {
-				curChar = original.charAt(i + j);
-				char tokenChar = token.charAt(j);
+				curChar = originalWithCaseApplied.charAt(i + j);
+				char tokenChar = tokenWithCaseApplied.charAt(j);
 				if (tokenChar != curChar) {
 					matched = false;
 					break;
@@ -78,7 +102,7 @@ public final class StringUtils {
 				break;
 			}
 
-			if (Character.isWhitespace(original.charAt(tokenEndIndex))) {
+			if (Character.isWhitespace(originalWithCaseApplied.charAt(tokenEndIndex))) {
 				// skip token from beginning of string
 				if (i == 0) {
 					lastTokenEndIndex = tokenEndIndex + 1;

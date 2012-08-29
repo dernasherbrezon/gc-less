@@ -11,35 +11,40 @@ import org.junit.Test;
 public class StringUtilsTest {
 
 	@Test
+	public void replaceWithSubToken() {
+		assertEquals("hello two world", StringUtils.replaceToken("hello two two tokens world", "two tokens").toString());
+	}
+
+	@Test
 	public void replaceTwoInARowTokens() {
 		assertEquals("hello world", StringUtils.replaceToken("hello two tokens two tokens world", "two tokens").toString());
 	}
-	
+
 	@Test
 	public void replaceAll() {
 		assertEquals("", StringUtils.replaceToken("hello world hello world hello world", "hello world").toString());
 	}
-	
+
 	@Test
 	public void tokenBiggerThanString() {
 		assertEquals("hello", StringUtils.replaceToken("hello", "hello1").toString());
 	}
-	
+
 	@Test
 	public void noReplaceStart() {
 		assertEquals("two token hello", StringUtils.replaceToken("two token hello", "two tokens").toString());
 	}
-	
+
 	@Test
 	public void noReplaceEnd() {
 		assertEquals("hello two token", StringUtils.replaceToken("hello two token", "two tokens").toString());
 	}
-	
+
 	@Test
 	public void noReplaceMiddle() {
 		assertEquals("hello two token world", StringUtils.replaceToken("hello two token world", "two tokens").toString());
 	}
-	
+
 	@Test
 	public void replaceStart() {
 		assertEquals("hello", StringUtils.replaceToken("two tokens hello", "two tokens").toString());
@@ -111,5 +116,4 @@ public class StringUtilsTest {
 		assertEquals("test", it.next());
 		assertFalse(it.hasNext());
 	}
-
 }

@@ -4,6 +4,17 @@ import java.util.Locale;
 
 public final class StringUtils {
 
+	public static String trimToNull(String str) {
+		if( str == null ) {
+			return null;
+		}
+		String result = str.trim();
+		if( result.length() == 0 ) {
+			return null;
+		}
+		return result;
+	}
+	
 	public static Iterable<String> splitBySpace(String str) {
 		return new Splitter(str);
 	}

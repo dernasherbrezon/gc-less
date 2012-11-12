@@ -11,6 +11,11 @@ import org.junit.Test;
 public class StringUtilsTest {
 
 	@Test
+	public void testReplaceAll() {
+		assertEquals("", StringUtils.replaceToken("explay", "explay"));
+	}
+	
+	@Test
 	public void replaceDoNotIgnoreCase() {
 		assertEquals("Two tokens hello", StringUtils.replaceToken("Two tokens hello", "two tokens").toString());
 	}

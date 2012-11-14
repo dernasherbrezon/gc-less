@@ -11,8 +11,13 @@ import org.junit.Test;
 public class StringUtilsTest {
 
 	@Test
+	public void testNotReplace() {
+		assertEquals("eexplay", StringUtils.replaceToken("eexplay", "explay").toString());
+	}
+	
+	@Test
 	public void testReplaceAll() {
-		assertEquals("", StringUtils.replaceToken("explay", "explay"));
+		assertEquals("", StringUtils.replaceToken("explay", "explay").toString());
 	}
 	
 	@Test

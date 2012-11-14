@@ -20,7 +20,8 @@ public final class StringUtils {
 	}
 
 	/**
-	 * @see public static Appendable replaceToken(String original, String token, boolean ignoreCase);
+	 * @see public static Appendable replaceToken(String original, String token,
+	 *      boolean ignoreCase);
 	 * @param original
 	 * @param token
 	 * @return
@@ -52,11 +53,12 @@ public final class StringUtils {
 		if (tokenLength > originalLength) {
 			return new StringBuilder(original);
 		}
-		
+
 		String originalWithCaseApplied;
 		String tokenWithCaseApplied;
-		if( ignoreCase ) {
-			//doesnt matter which locale to use. Just make sure they are in the same locale.
+		if (ignoreCase) {
+			// doesnt matter which locale to use. Just make sure they are in the
+			// same locale.
 			originalWithCaseApplied = original.toLowerCase(Locale.UK);
 			tokenWithCaseApplied = token.toLowerCase(Locale.UK);
 		} else {
@@ -70,8 +72,9 @@ public final class StringUtils {
 		int lastTokenEndIndex = 0;
 		for (int i = 0; i < originalLength;) {
 			int tokenEndIndex = tokenLength + i;
-			//do no check further. there is not enough chars in original to match token
-			if( tokenEndIndex > originalLength ) {
+			// do no check further. there is not enough chars in original to
+			// match token
+			if (tokenEndIndex > originalLength) {
 				break;
 			}
 			char curChar = originalWithCaseApplied.charAt(i);
@@ -103,12 +106,17 @@ public final class StringUtils {
 
 			if (!matched) {
 				i++;
+				previousCharIsWhitespace = false;
 				continue;
 			}
 
 			// skip token from ending of string
 			if (tokenEndIndex == originalLength) {
-				result.append(original.substring(lastTokenEndIndex, i - 1));
+				int endIndex = 0;
+				if (i - 1 > 0) {
+					endIndex = i - 1;
+				}
+				result.append(original.substring(lastTokenEndIndex, endIndex));
 				lastTokenEndIndex = tokenEndIndex;
 				break;
 			}

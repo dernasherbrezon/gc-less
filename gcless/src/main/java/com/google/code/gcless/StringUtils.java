@@ -172,6 +172,29 @@ public final class StringUtils {
 		}
 		return false;
 	}
+	
+    public static boolean containsIgnoreCase(CharSequence str, CharSequence searchStr) {
+        if (str == null || searchStr == null) {
+            return false;
+        }
+        int len = searchStr.length();
+        int max = str.length() - len;
+        for (int i = 0; i <= max; i++) {
+            if (regionMatches(str, true, i, searchStr, 0, len)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    private static boolean regionMatches(CharSequence cs, boolean ignoreCase, int thisStart,
+            CharSequence substring, int start, int length)    {
+        if (cs instanceof String && substring instanceof String) {
+            return ((String) cs).regionMatches(ignoreCase, thisStart, ((String) substring), start, length);
+        } else {
+            return cs.toString().regionMatches(ignoreCase, thisStart, substring.toString(), start, length);
+        }
+    }
 
 	private StringUtils() {
 		// do nothing

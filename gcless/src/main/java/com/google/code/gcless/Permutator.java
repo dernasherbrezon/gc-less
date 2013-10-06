@@ -87,16 +87,4 @@ class Permutator<T> implements Iterable<List<T>>, Iterator<List<T>> {
 		return this;
 	}
 
-	public static void main(String[] args) throws Exception {
-		List<String> data = new ArrayList<String>();
-		data.add("1");
-		data.add("2");
-		data.add("3");
-		data.add("4");
-		Permutator<String> p = new Permutator<String>(data);
-		while (p.hasNext()) {
-			System.out.println(p.next());
-		}
-	}
-
 }

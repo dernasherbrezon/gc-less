@@ -2,6 +2,7 @@ package com.google.code.gcless;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Iterator;
@@ -9,6 +10,21 @@ import java.util.Iterator;
 import org.junit.Test;
 
 public class StringUtilsTest {
+	
+	@Test
+	public void testUnicodeWhitespaceTrimToNull() {
+		assertNull(StringUtils.trimToNull("  "));
+	}
+	
+	@Test
+	public void testUnicodeWhitespaceIsBlank() {
+		assertTrue(StringUtils.isBlank("  "));
+	}
+	
+	@Test
+	public void testUnicodeWhitespaceIsNotBlank() {
+		assertFalse(StringUtils.isNotBlank("  "));
+	}
 
 	@Test
 	public void testNotReplace() {

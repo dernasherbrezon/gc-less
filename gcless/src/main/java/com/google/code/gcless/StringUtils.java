@@ -4,15 +4,38 @@ import java.util.Locale;
 
 public final class StringUtils {
 
+	// Mod-79 lookup table.
+	private final static char[] table = { 1, 0, 160, 0, 0, 0, 0, 0, 0, 9, 10, 11, 12, 13, 0, 0, 8232, 8233, 0, 0, 0, 0, 0, 8239, 0, 0, 0, 0, 0, 0, 0, 0, 32, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12288, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 133, 8192, 8193, 8194,
+			8195, 8196, 8197, 8198, 8199, 8200, 8201, 8202, 0, 0, 0, 0, 0, 8287, 5760, 0, 0, 6158, 0, 0, 0 };
+
 	public static String trimToNull(String str) {
 		if( str == null ) {
 			return null;
 		}
-		String result = str.trim();
+		String result = trim(str);
 		if( result.length() == 0 ) {
 			return null;
 		}
 		return result;
+	}
+	
+	public static String trim(CharSequence sequence) {
+		int len = sequence.length();
+		int first;
+		int last;
+
+		for (first = 0; first < len; first++) {
+			if (!isWhitespace(sequence.charAt(first))) {
+				break;
+			}
+		}
+		for (last = len - 1; last > first; last--) {
+			if (!isWhitespace(sequence.charAt(last))) {
+				break;
+			}
+		}
+
+		return sequence.subSequence(first, last + 1).toString();
 	}
 	
 	public static Iterable<String> splitBySpace(String str) {
@@ -153,7 +176,7 @@ public final class StringUtils {
 			return true;
 		}
 		for (int i = 0; i < strLen; i++) {
-			if ((Character.isWhitespace(str.charAt(i)) == false)) {
+			if ((isWhitespace(str.charAt(i)) == false)) {
 				return false;
 			}
 		}
@@ -166,7 +189,7 @@ public final class StringUtils {
 			return false;
 		}
 		for (int i = 0; i < strLen; i++) {
-			if ((Character.isWhitespace(str.charAt(i)) == false)) {
+			if ((isWhitespace(str.charAt(i)) == false)) {
 				return true;
 			}
 		}
@@ -195,6 +218,10 @@ public final class StringUtils {
             return cs.toString().regionMatches(ignoreCase, thisStart, substring.toString(), start, length);
         }
     }
+    
+	private static boolean isWhitespace(char c) {
+		return table[c % 79] == c;
+	}
 
 	private StringUtils() {
 		// do nothing

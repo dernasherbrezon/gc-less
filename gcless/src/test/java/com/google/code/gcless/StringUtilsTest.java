@@ -12,6 +12,11 @@ import org.junit.Test;
 public class StringUtilsTest {
 	
 	@Test
+	public void testNormalizeString() {
+		assertEquals("1  2", StringUtils.normalizeWhitespaces("1  2"));
+	}
+	
+	@Test
 	public void testUnicodeWhitespaceTrimToNull() {
 		assertNull(StringUtils.trimToNull("  "));
 	}

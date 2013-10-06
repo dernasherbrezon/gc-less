@@ -6,11 +6,11 @@
 <booleanAttribute key="M2_OFFLINE" value="false"/>
 <stringAttribute key="M2_PROFILES" value=""/>
 <listAttribute key="M2_PROPERTIES">
-<listEntry value="file=./target/gcless-7.0.jar"/>
+<listEntry value="file=./target/gcless-8.0.jar"/>
 <listEntry value="pomFile=pom.xml"/>
 <listEntry value="localRepositoryPath=../gcless-maven/"/>
 <listEntry value="createChecksum=true"/>
-<listEntry value="sources=./target/gcless-7.0-sources.jar"/>
+<listEntry value="sources=./target/gcless-8.0-sources.jar"/>
 </listAttribute>
 <stringAttribute key="M2_RUNTIME" value="EMBEDDED"/>
 <booleanAttribute key="M2_SKIP_TESTS" value="false"/>

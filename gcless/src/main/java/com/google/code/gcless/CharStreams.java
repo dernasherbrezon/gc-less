@@ -8,14 +8,16 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class CharStreams implements Iterator<String> {
+public class CharStreams {
 
 	private static final int BUF_SIZE = 0x800; // 2K chars (4K bytes)
-	private final BufferedReader r;
-	private String curLine = null;
 
 	public static Iterator<String> readLines(Reader r) {
-		return new CharStreams(getBufferedReader(r));
+		return new NewLineDelimetedIterator(getBufferedReader(r));
+	}
+	
+	public static Iterator<String> readLines(Reader r, int minLength, String upToToken) {
+		return new FixedSizeWithUpToTokenIterator(getBufferedReader(r), minLength, upToToken);
 	}
 
 	private static BufferedReader getBufferedReader(Reader r) {
@@ -56,32 +58,7 @@ public class CharStreams implements Iterator<String> {
 		return total;
 	}
 
-	private CharStreams(BufferedReader r) {
-		this.r = r;
+	private CharStreams() {
+		//do nothing
 	}
-
-	@Override
-	public boolean hasNext() {
-		try {
-			curLine = r.readLine();
-			if (curLine != null) {
-				return true;
-			} else {
-				return false;
-			}
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@Override
-	public String next() {
-		return curLine;
-	}
-
-	@Override
-	public void remove() {
-		throw new UnsupportedOperationException("unsupported opetation");
-	}
-
 }

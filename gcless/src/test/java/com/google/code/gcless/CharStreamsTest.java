@@ -1,6 +1,7 @@
 package com.google.code.gcless;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.io.StringReader;
 import java.util.ArrayList;
@@ -12,6 +13,24 @@ import org.junit.Test;
 
 public class CharStreamsTest {
 
+	@Test
+	public void testFixedSizeWithUpToToken2() {
+		Iterator<String> it = CharStreams.readLines(new StringReader("1234ab123ab6789"), 5, "ab");
+		assertTrue(it.hasNext());
+		assertEquals("1234ab123ab", it.next());
+		assertTrue(it.hasNext());
+		assertEquals("6789", it.next());
+	}
+
+	@Test
+	public void testFixedSizeWithUpToToken() {
+		Iterator<String> it = CharStreams.readLines(new StringReader("123456789ab123456789"), 5, "ab");
+		assertTrue(it.hasNext());
+		assertEquals("123456789ab", it.next());
+		assertTrue(it.hasNext());
+		assertEquals("123456789", it.next());
+	}
+	
 	@Test
 	public void testLazyStringReader() {
 		Iterator<String> str = CharStreams

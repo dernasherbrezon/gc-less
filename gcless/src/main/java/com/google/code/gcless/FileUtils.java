@@ -15,4 +15,16 @@ public class FileUtils {
 		return tempDirFile;
 	}
 
+	public static long getNumberOfFiles(File baseDirectory) {
+		if (baseDirectory.isFile()) {
+			return 1;
+		}
+		long result = 0;
+		File[] contents = baseDirectory.listFiles();
+		for (File cur : contents) {
+			result += getNumberOfFiles(cur);
+		}
+		return result;
+	}
+	
 }

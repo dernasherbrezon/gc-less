@@ -19,6 +19,6 @@ Maven
 <dependency>
         <groupId>com.aerse</groupId>
         <artifactId>gcless</artifactId>
-        <version>11.0</version>
+        <version>11.1</version>
 </dependency>
 ```

@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.aerse</groupId>
 	<artifactId>gcless</artifactId>
-	<version>11.1-SNAPSHOT</version>
+	<version>11.1</version>
 	<url>https://github.com/dernasherbrezon/gc-less</url>
 	<name>gc-less</name>
 	<description>A lot of various gc-friendly utils</description>
@@ -232,7 +232,7 @@
 		<url>https://github.com/dernasherbrezon/gc-less</url>
 		<connection>scm:git:git@github.com/dernasherbrezon/gc-less.git</connection>
 		<developerConnection>scm:git:https://github.com/dernasherbrezon/gc-less.git</developerConnection>
-    <tag>HEAD</tag>
+    <tag>gcless-11.1</tag>
   </scm>
 
 	<issueManagement>

@@ -1,0 +1,52 @@
+{
+	"integer": 19,
+	"long": 19,
+	"float" :  12.45,
+	"double" : -34.45e-1,
+	"string": "\"\\\/\b\f\n\r\t\u2022string",
+	"boolean_true": true,
+	"boolean_false" : false,
+	"object" : {
+		"number": 19,
+		"object_inner" : {
+			"number" : 19,
+			"array_inner" : [
+				19, null
+			]
+		}
+	},
+	"array_integer" : [
+		19, null
+	],
+	"array_long" : [
+		19, null
+	],
+	"array_string" : [
+		"\"test\"", null, "2"
+	],
+	"array_object" : [
+		{
+			"number" : 19,
+			"object_inner" : {
+				"number" : 19
+			}
+		},
+		null
+	],
+	"array_boolean" : [
+		false, true, null
+	],
+	"array_array" : [
+		[ 19, null ],
+		null,
+		[ "1" , null ]
+	],
+	"integer_null" : null,
+	"long_null" : null,
+	"float_null" : null,
+	"double_null" : null,
+	"string_null": null,
+	"boolean_null"    :  null,
+	"object_null" : null,
+	"array_null" : null
+}

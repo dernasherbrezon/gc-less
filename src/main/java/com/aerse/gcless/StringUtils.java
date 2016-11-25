@@ -24,6 +24,23 @@ public final class StringUtils {
 		return new String(result);
 	}
 
+	public static boolean equals(StringBuilder b, String str) {
+		if (b == null) {
+			return false;
+		}
+		if (str.length() != b.length()) {
+			return false;
+		}
+
+		for (int i = 0; i < str.length(); i++) {
+			if (str.charAt(i) != b.charAt(i)) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+	
 	public static String trimToNull(String str) {
 		if (str == null) {
 			return null;

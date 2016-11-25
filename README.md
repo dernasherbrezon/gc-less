@@ -15,17 +15,10 @@ Currently:
 Maven
 -----
 
-```
+```xml
 <dependency>
-        <groupId>com.google.code</groupId>
+        <groupId>com.aerse</groupId>
         <artifactId>gcless</artifactId>
-        <version>7.0</version>
+        <version>11.0</version>
 </dependency>
-
-<repositories>
-        <repository>
-                <id>gcless-repo</id>
-                <url>http://gc-less.googlecode.com/svn/trunk/maven/</url>
-        </repository>
-</repositories>
 ```

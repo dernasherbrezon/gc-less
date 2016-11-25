@@ -10,29 +10,9 @@
 			<param name="intervals" value="1000,2000,10000" />
 		</filter>
 	</appender>
-	<appender name="mail" class="org.apache.log4j.net.SMTPAppender">
-		<param name="BufferSize" value="512" />
-		<param name="SMTPHost" value="smtp.yandex.ru" />
-		<param name="SMTPPassword" value="totalbugs" />
-		<param name="SMTPUsername" value="bug@onlytime.ru" />
-		<param name="From" value="bug@onlytime.ru" />
-		<param name="To" value="info@onlytime.ru" />
-		<param name="Subject" value="Exception in Workshop" />
-		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern" value="[%d{ISO8601}]%n%n%-5p%n%n%c%n%n%m%n%n" />
-		</layout>
-		<filter class="org.apache.log4j.varia.LevelRangeFilter">
-			<param name="LevelMin" value="error" />
-			<param name="LevelMax" value="fatal" />
-		</filter>
-		<filter class="com.st.logging.TimedFilter">
-			<param name="intervals" value="100000,200000" />
-		</filter>
-	</appender>
 
-	<logger name="com.st">
+	<logger name="com.aerse">
 		<level value="DEBUG" />
 		<appender-ref ref="console" />
-		<appender-ref ref="mail" />
 	</logger>
 </log4j:configuration>

@@ -138,6 +138,7 @@ public final class JSONWriter implements Closeable, Flushable {
 	 * Creates a new instance that writes a JSON-encoded stream to {@code out}.
 	 * For best performance, ensure {@link Writer} is buffered; wrapping in
 	 * {@link java.io.BufferedWriter BufferedWriter} if necessary.
+	 * @param out - out
 	 */
 	public JSONWriter(Writer out) {
 		if (out == null) {
@@ -176,6 +177,7 @@ public final class JSONWriter implements Closeable, Flushable {
 	 * <li>Numbers may be {@link Double#isNaN() NaNs} or
 	 * {@link Double#isInfinite() infinities}.
 	 * </ul>
+	 * @param lenient - lenient
 	 */
 	public void setLenient(boolean lenient) {
 		this.lenient = lenient;
@@ -183,6 +185,7 @@ public final class JSONWriter implements Closeable, Flushable {
 
 	/**
 	 * Returns true if this writer has relaxed syntax rules.
+	 * @return lenient - lenient
 	 */
 	public boolean isLenient() {
 		return lenient;
@@ -192,7 +195,8 @@ public final class JSONWriter implements Closeable, Flushable {
 	 * Begins encoding a new array. Each call to this method must be paired with
 	 * a call to {@link #endArray}.
 	 * 
-	 * @return this writer.
+	 * @return this writer
+	 * @throws java.io.IOException - in case of error
 	 */
 	public JSONWriter beginArray() throws IOException {
 		return open(JSONScope.EMPTY_ARRAY, "[");
@@ -202,6 +206,7 @@ public final class JSONWriter implements Closeable, Flushable {
 	 * Ends encoding the current array.
 	 * 
 	 * @return this writer.
+	 * @throws java.io.IOException - in case of error
 	 */
 	public JSONWriter endArray() throws IOException {
 		return close(JSONScope.EMPTY_ARRAY, JSONScope.NONEMPTY_ARRAY, "]");
@@ -212,6 +217,7 @@ public final class JSONWriter implements Closeable, Flushable {
 	 * with a call to {@link #endObject}.
 	 * 
 	 * @return this writer.
+	 * @throws java.io.IOException - in case of error
 	 */
 	public JSONWriter beginObject() throws IOException {
 		return open(JSONScope.EMPTY_OBJECT, "{");
@@ -221,6 +227,7 @@ public final class JSONWriter implements Closeable, Flushable {
 	 * Ends encoding the current object.
 	 * 
 	 * @return this writer.
+	 * @throws java.io.IOException - in case of error
 	 */
 	public JSONWriter endObject() throws IOException {
 		return close(JSONScope.EMPTY_OBJECT, JSONScope.NONEMPTY_OBJECT, "}");
@@ -229,6 +236,7 @@ public final class JSONWriter implements Closeable, Flushable {
 	/**
 	 * Enters a new scope by appending any necessary whitespace and the given
 	 * bracket.
+	 * @throws java.io.IOException - in case of error
 	 */
 	private JSONWriter open(JSONScope empty, String openBracket) throws IOException {
 		beforeValue(true);
@@ -240,6 +248,7 @@ public final class JSONWriter implements Closeable, Flushable {
 	/**
 	 * Closes the current scope by appending any necessary whitespace and the
 	 * given bracket.
+	 * @throws java.io.IOException - in case of error
 	 */
 	private JSONWriter close(JSONScope empty, JSONScope nonempty, String closeBracket) throws IOException {
 		JSONScope context = peek();
@@ -275,6 +284,7 @@ public final class JSONWriter implements Closeable, Flushable {
 	 * @param name
 	 *            the name of the forthcoming value. May not be null.
 	 * @return this writer.
+	 * @throws java.io.IOException - on io error
 	 */
 	public JSONWriter name(String name) throws IOException {
 		if (name == null) {
@@ -291,6 +301,7 @@ public final class JSONWriter implements Closeable, Flushable {
 	 * @param value
 	 *            the literal string value, or null to encode a null literal.
 	 * @return this writer.
+	 * @throws java.io.IOException - on io error
 	 */
 	public JSONWriter value(String value) throws IOException {
 		if (value == null) {
@@ -305,6 +316,7 @@ public final class JSONWriter implements Closeable, Flushable {
 	 * Encodes {@code null}.
 	 * 
 	 * @return this writer.
+	 * @throws java.io.IOException - on io error
 	 */
 	public JSONWriter nullValue() throws IOException {
 		beforeValue(false);
@@ -314,8 +326,10 @@ public final class JSONWriter implements Closeable, Flushable {
 
 	/**
 	 * Encodes {@code value}.
-	 * 
+	 *
+	 * @param value - value
 	 * @return this writer.
+	 * @throws java.io.IOException - on io error
 	 */
 	public JSONWriter value(boolean value) throws IOException {
 		beforeValue(false);
@@ -331,6 +345,7 @@ public final class JSONWriter implements Closeable, Flushable {
 	 *            {@link Double#isInfinite() infinities} unless this writer is
 	 *            lenient.
 	 * @return this writer.
+	 * @throws java.io.IOException - on io error
 	 */
 	public JSONWriter value(double value) throws IOException {
 		if (!lenient && (Double.isNaN(value) || Double.isInfinite(value))) {
@@ -343,8 +358,9 @@ public final class JSONWriter implements Closeable, Flushable {
 
 	/**
 	 * Encodes {@code value}.
-	 * 
+	 * @param value - value 
 	 * @return this writer.
+	 * @throws java.io.IOException - on io error
 	 */
 	public JSONWriter value(long value) throws IOException {
 		beforeValue(false);
@@ -360,6 +376,7 @@ public final class JSONWriter implements Closeable, Flushable {
 	 *            {@link Double#isInfinite() infinities} unless this writer is
 	 *            lenient.
 	 * @return this writer.
+	 * @throws java.io.IOException - on io error
 	 */
 	public JSONWriter value(Number value) throws IOException {
 		if (value == null) {

@@ -79,11 +79,9 @@ public final class StringUtils {
 	}
 
 	/**
-	 * @see public static Appendable replaceToken(String original, String token,
-	 *      boolean ignoreCase);
-	 * @param original
-	 * @param token
-	 * @return
+	 * @param original - original value
+	 * @param token - replace with
+	 * @return - result
 	 */
 	public static Appendable replaceToken(String original, String token) {
 		return replaceToken(original, token, false);
@@ -96,9 +94,9 @@ public final class StringUtils {
 	 * 
 	 * @param original
 	 *            - cannot be null
-	 * @param token
-	 * @param ignoreCase
-	 * @return
+	 * @param token - replace with
+	 * @param ignoreCase - if token case should be ignored
+	 * @return - result
 	 */
 	public static Appendable replaceToken(String original, String token, boolean ignoreCase) {
 		if (original == null) {

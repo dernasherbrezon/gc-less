@@ -71,7 +71,7 @@ public class ValidationResult extends HashMap<String, String> {
 	@SuppressWarnings("rawtypes")
 	public static <T> ValidationResult valueOf(Set<ConstraintViolation<T>> violations) {
 		if (violations == null || violations.isEmpty()) {
-			return new ValidationResult();
+			return null;
 		}
 		ValidationResult result = new ValidationResult();
 		for (ConstraintViolation cur : violations) {
@@ -82,7 +82,7 @@ public class ValidationResult extends HashMap<String, String> {
 
 	public static ValidationResult valueOfMethodValidation(Set<? extends ConstraintViolation<?>> violations) {
 		if (violations == null || violations.isEmpty()) {
-			return new ValidationResult();
+			return null;
 		}
 		ValidationResult result = new ValidationResult();
 		for (ConstraintViolation<?> cur : violations) {
@@ -99,14 +99,14 @@ public class ValidationResult extends HashMap<String, String> {
 	@SuppressWarnings("rawtypes")
 	public static <T> ValidationResult valueOfFirst(Set<ConstraintViolation<T>> violations) {
 		if (violations == null || violations.isEmpty()) {
-			return new ValidationResult();
+			return null;
 		}
 		ValidationResult result = new ValidationResult();
 		for (ConstraintViolation cur : violations) {
 			result.setGeneralError(cur.getMessage());
 			return result;
 		}
-		return new ValidationResult();
+		return null;
 	}
 
 	public static ValidationResult valueOf(BindingResult validation) {

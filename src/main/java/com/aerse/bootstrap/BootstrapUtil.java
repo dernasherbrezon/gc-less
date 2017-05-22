@@ -45,10 +45,10 @@ final public class BootstrapUtil {
 		}
 
 		String lang;
-		if( System. getProperty("lang") != null ) {
+		if (System.getProperty("lang") != null) {
 			lang = System.getProperty("lang");
 		} else {
-			//JVM standard parameter
+			// JVM standard parameter
 			lang = System.getProperty("user.language");
 		}
 		CurrentServer serverConfigFromParams = new CurrentServer(System.getProperty("env"), lang, System.getProperty("serverID"));
@@ -139,8 +139,9 @@ final public class BootstrapUtil {
 		if (lang == null) {
 			return null;
 		}
+		String country = System.getProperty("user.country");
 		for (Locale cur : Locale.getAvailableLocales()) {
-			if (cur.getLanguage().equals(lang)) {
+			if (cur.getLanguage().equals(lang) && (country == null || cur.getCountry().equals(country))) {
 				return cur;
 			}
 		}
